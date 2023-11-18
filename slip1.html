@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Student Registration Form</h2>
+
+<form id="registrationForm" onsubmit="validateForm(event)">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+    <span id="firstNameError" class="error"></span><br>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+    <span id="lastNameError" class="error"></span><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required>
+    <span id="ageError" class="error"></span><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+    function validateForm(event) {
+        // Prevent the form from submitting
+        event.preventDefault();
+
+        // Get form values
+        var firstName = document.getElementById('firstName').value;
+        var lastName = document.getElementById('lastName').value;
+        var age = document.getElementById('age').value;
+
+        // Regular expression for validating names (only alphabets)
+        var nameRegex = /^[A-Za-z]+$/;
+
+        // Check if first name contains only alphabets
+        if (!nameRegex.test(firstName)) {
+            document.getElementById('firstNameError').innerHTML = 'First name should contain only alphabets';
+            return;
+        } else {
+            document.getElementById('firstNameError').innerHTML = '';
+        }
+
+        // Check if last name contains only alphabets
+        if (!nameRegex.test(lastName)) {
+            document.getElementById('lastNameError').innerHTML = 'Last name should contain only alphabets';
+            return;
+        } else {
+            document.getElementById('lastNameError').innerHTML = '';
+        }
+
+        // Check if age is between 18 and 50
+        if (age < 18 || age > 50) {
+            document.getElementById('ageError').innerHTML = 'Age should be between 18 and 50';
+            return;
+        } else {
+            document.getElementById('ageError').innerHTML = '';
+        }
+
+        // If all validations pass, you can submit the form or perform further actions
+        alert('Form submitted successfully!');
+        // You can uncomment the following line to allow form submission
+        // document.getElementById('registrationForm').submit();
+    }
+</script>
+
+</body>
+</html>
